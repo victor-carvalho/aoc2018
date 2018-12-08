@@ -41,7 +41,7 @@ auto getEvents(string input) {
 }
 
 auto asleepHoursByGuards(Range)(Range events)
-if(isInputRange!Range && is(typeof(Range.init.front) == Event)) {
+if(isInputRange!Range && is(ElementType!Range == Event)) {
   int[][int] asleepHours;
   while (!events.empty) {
     auto currentGuard = events.front.guard;
