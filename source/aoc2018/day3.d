@@ -47,8 +47,6 @@ auto overlaps (int[] x, int[] y) {
 }
 
 auto puzzle2(string input) {
-  auto grid = initGrid(1000, 1000);
-
   auto assignments = input.lineSplitter
     .map!(line => line.matchFirst(reg).drop(1).map!(m => m.to!int).array)
     .array;
