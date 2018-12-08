@@ -1,0 +1,14 @@
+.dub
+docs.json
+__dummy.html
+docs/
+aoc2018.so
+aoc2018.dylib
+aoc2018.dll
+aoc2018.a
+aoc2018.lib
+aoc2018-test-*
+*.exe
+*.o
+*.obj
+*.lst

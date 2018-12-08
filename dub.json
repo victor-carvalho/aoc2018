@@ -1,0 +1,12 @@
+{
+	"name": "aoc2018",
+	"authors": [
+		"Victor Carvalho"
+	],
+	"description": "A minimal D application.",
+	"copyright": "Copyright © 2018, Victor Carvalho",
+	"license": "proprietary",
+	"dependencies": {
+		"emsi_containers": "~>0.6"
+	}
+}
