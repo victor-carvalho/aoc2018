@@ -5,11 +5,7 @@ import std.conv: to;
 import std.range;
 import std.string;
 
-import std.stdio;
-
 struct Node {
-  int numChildren;
-  int numMetadata;
   Node[] children;
   int[] metadata;
 }
@@ -34,7 +30,7 @@ if (isInputRange!Range && is(ElementType!Range == int)) {
 
   auto metadata = input.readMetadata(numMetadata);
 
-  return Node(numChildren, numMetadata, children, metadata);
+  return Node(children, metadata);
 }
 
 Node readNode(Range)(Range input)
@@ -47,10 +43,11 @@ int sumMetadata(Node node) {
 }
 
 int value(Node node) {
-  if (node.numChildren > 0) {
-    return node.metadata.filter!(i => i <= node.numChildren).map!(i => node.children[i-1].value).sum;
+  auto numChildren = node.children.length;
+  if (numChildren > 0) {
+    return node.metadata.filter!(i => i <= numChildren).map!(i => node.children[i-1].value).sum;
   }
-  return node.sumMetadata;
+  return node.metadata.sum;
 }
 
 auto puzzle1(string input) {
