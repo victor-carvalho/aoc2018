@@ -7,19 +7,14 @@ import std.string: lineSplitter;
 
 import containers;
 
-auto puzzle1(string input) {
-	return input
-		.lineSplitter
-		.map!(line => line.to!int)
-		.fold!((acc, x) => acc + x)(0);
+auto puzzle1(Range)(Range input)
+if (isInputRange!Range && is(ElementType!Range == int)) {
+	return input.fold!((acc, x) => acc + x)(0);
 }
 
-auto puzzle2(string input) {
-	auto freqs = input
-		.lineSplitter
-		.map!(line => line.to!int)
-		.cycle
-		.cumulativeFold!((acc, x) => acc + x)(0);
+auto puzzle2(Range)(Range input)
+if (isInputRange!Range && is(ElementType!Range == int)) {
+	auto freqs = input.cycle.cumulativeFold!((acc, x) => acc + x)(0);
 
 	auto seen = HashSet!int(1);
 
@@ -38,6 +33,7 @@ auto puzzle2(string input) {
 void run() {
   import aoc2018.utils;
 
-  runPuzzle!("day1", puzzle1)();
-  runPuzzle!("day1", puzzle2)();
+	auto input = readInput(__MODULE__).lineSplitter.map!(line => line.to!int);
+  runPuzzle!(__MODULE__, puzzle1)(input);
+  runPuzzle!(__MODULE__, puzzle2)(input);
 }

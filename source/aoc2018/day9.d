@@ -5,7 +5,6 @@ import std.conv: to;
 import std.range;
 import std.regex;
 import std.string;
-import std.stdio;
 
 auto reg = regex(r"(\d+) players; last marble is worth (\d+) points");
 
@@ -26,7 +25,11 @@ private class Marble {
 }
 
 class Circle {
-  private Marble current = new Marble(0);
+  private Marble current;
+
+  this() {
+    this.current = new Marble(0);
+  }
 
   void insert(size_t value) {
     auto prev = this.current.next;
@@ -63,20 +66,18 @@ auto maxScore(size_t numPlayers, size_t highestMarble) {
   return players.maxElement;
 }
 
-auto puzzle1(string input) {
-  auto s = input.matchFirst(reg).drop(1).map!"a.to!size_t".array;
-  return maxScore(s[0], s[1]);
+auto puzzle1(size_t[] input) {
+  return maxScore(input[0], input[1]);
 }
 
-auto puzzle2(string input) {
-  auto s = input.matchFirst(reg).drop(1).map!"a.to!size_t".array;
-  return maxScore(s[0], s[1] * 100);
+auto puzzle2(size_t[] input) {
+  return maxScore(input[0], input[1] * 100);
 }
-
 
 void run() {
   import aoc2018.utils;
 
-  runPuzzle!("day9", puzzle1)();
-  runPuzzle!("day9", puzzle2)();
+  auto input = readInput(__MODULE__).matchFirst(reg).drop(1).map!"a.to!size_t".array;
+  runPuzzle!(__MODULE__, puzzle1)(input);
+  runPuzzle!(__MODULE__, puzzle2)(input);
 }

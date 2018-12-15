@@ -6,7 +6,6 @@ import std.datetime;
 import std.range;
 import std.regex;
 import std.string;
-import std.stdio;
 
 auto reg = regex(r"\[(\d{4})-(\d{2})-(\d{2}) (\d{2}):(\d{2})\] (Guard #(\d+) begins shift|falls asleep|wakes up)");
 
@@ -66,16 +65,12 @@ if(isInputRange!Range && is(ElementType!Range == Event)) {
   return asleepHours;
 }
 
-auto puzzle1(string input) {
-  auto events = input.getEvents;
-  auto asleepHours = events.asleepHoursByGuards;
+auto puzzle1(int[][int] asleepHours) {
   auto guard = asleepHours.byPair.maxElement!"a.value.sum".key;
   return guard * asleepHours[guard][].maxIndex;
 }
 
-auto puzzle2(string input) {
-  auto events = input.getEvents;
-  auto asleepHours = events.asleepHoursByGuards;
+auto puzzle2(int[][int] asleepHours) {
   auto guard = asleepHours.byPair.maxElement!"a.value.maxElement".key;
   return guard * asleepHours[guard][].maxIndex;
 }
@@ -83,6 +78,7 @@ auto puzzle2(string input) {
 void run() {
   import aoc2018.utils;
 
-  runPuzzle!("day4", puzzle1);
-  runPuzzle!("day4", puzzle2);
+  auto input = readInput(__MODULE__).getEvents.asleepHoursByGuards;
+  runPuzzle!(__MODULE__, puzzle1)(input);
+  runPuzzle!(__MODULE__, puzzle2)(input);
 }

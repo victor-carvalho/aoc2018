@@ -2,7 +2,11 @@ import aoc2018.utils;
 import std.meta;
 import std.stdio;
 
-alias days = AliasSeq!("day1", "day2", "day3", "day4", "day5", "day6", "day7", "day8", "day9");
+alias days = AliasSeq!(
+	"day1", "day2", "day3", "day4", "day5",
+	"day6", "day7", "day8", "day9", "day10",
+	"day11"
+);
 
 void main(string[] args) {
 	if (args.length > 1) {

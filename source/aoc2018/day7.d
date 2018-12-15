@@ -29,7 +29,8 @@ struct Task {
 
 auto getInstructions(string input) {
   return input.lineSplitter
-    .map!(line => line.matchFirst(reg).drop(1).map!"cast(ubyte)(a[0])".array);
+    .map!(line => line.matchFirst(reg).drop(1).map!"cast(ubyte)(a[0])".array)
+    .array;
 }
 
 auto buildGraph(Range)(Range instructions)
@@ -47,8 +48,8 @@ if (isInputRange!Range && is(ElementType!Range == ubyte[])){
   return Graph(nodes, degree);
 }
 
-auto puzzle1(string input) {
-  auto graph = input.getInstructions.buildGraph;
+auto puzzle1(ubyte[][] input) {
+  auto graph = input.buildGraph;
   auto firstNodes = graph.nodes.byKey.filter!(node => graph.degree.require(node, 0) == 0).array.sort;
   auto queue = DList!ubyte(firstNodes);
   ubyte[] output; 
@@ -67,8 +68,8 @@ auto puzzle1(string input) {
   return output.map!"cast(char)(a)";
 }
 
-auto puzzle2(string input) {
-  auto graph = input.getInstructions.buildGraph;
+auto puzzle2(ubyte[][] input) {
+  auto graph = input.buildGraph;
   auto firstNodes = graph.nodes.byKey.filter!(node => graph.degree.require(node, 0) == 0).array.sort;
   auto queue = DList!ubyte(firstNodes);
   auto workQueue = heapify!"a.time > b.time"(new Task[0]); 
@@ -95,6 +96,7 @@ auto puzzle2(string input) {
 void run() {
   import aoc2018.utils;
 
-  runPuzzle!("day7", puzzle1)();
-  runPuzzle!("day7", puzzle2)();
+  auto input = readInput(__MODULE__).getInstructions;
+  runPuzzle!(__MODULE__, puzzle1)(input);
+  runPuzzle!(__MODULE__, puzzle2)(input);
 }

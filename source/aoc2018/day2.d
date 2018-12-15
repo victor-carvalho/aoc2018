@@ -2,7 +2,7 @@ module aoc2018.day2;
 
 import std.algorithm;
 import std.range;
-import std.string: lineSplitter;
+import std.string;
 import std.typecons;
 import std.utf: byChar;
 
@@ -28,9 +28,7 @@ auto countOccurrences(string line) {
 	return tuple(has2, has3);
 }
 
-auto puzzle1(string input) {
-  auto codes = input.lineSplitter.array;
-
+auto puzzle1(string[] codes) {
   auto has2 = 0;
   auto has3 = 0;
   foreach(code; codes) {
@@ -42,15 +40,13 @@ auto puzzle1(string input) {
   return has2 * has3;
 }
 
-auto puzzle2(string input) {
-	auto codes = input.lineSplitter.array;
-
-	for (int i = 0; i < codes.length; i++) {
-		for (int j = 0; j < codes.length; j++) {
+auto puzzle2(string[] codes) {
+	foreach(i; 0..codes.length) {
+		foreach(j; 0..codes.length) {
 			auto code1 = codes[i];
 			auto code2 = codes[j];
 			int diffpos = -1;
-			for (int k = 0; k < code1.length; k++) {
+			for(int k = 0; k < code1.length; k++) {
 				if (code1[k] != code2[k]) {
 					if (diffpos != -1) {
 						diffpos = -1;
@@ -69,6 +65,8 @@ auto puzzle2(string input) {
 
 void run() {
   import aoc2018.utils;
-  runPuzzle!("day2", puzzle1);
-  runPuzzle!("day2", puzzle2);
+
+	auto input = readInput(__MODULE__).lineSplitter.array;
+  runPuzzle!(__MODULE__, puzzle1)(input);
+  runPuzzle!(__MODULE__, puzzle2)(input);
 }

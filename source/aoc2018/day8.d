@@ -50,26 +50,19 @@ int value(Node node) {
   return node.metadata.sum;
 }
 
-auto puzzle1(string input) {
-  return input
-    .splitter
-    .map!"a.to!int"
-    .readNode
-    .sumMetadata;
+auto puzzle1(Node node) {
+  return node.sumMetadata;
 }
 
-auto puzzle2(string input) {
-  return input
-    .splitter
-    .map!"a.to!int"
-    .readNode
-    .value;
+auto puzzle2(Node node) {
+  return node.value;
 }
 
 
 void run() {
   import aoc2018.utils;
 
-  runPuzzle!("day8", puzzle1)();
-  runPuzzle!("day8", puzzle2)();
+  auto input = readInput(__MODULE__).splitter.map!"a.to!int".readNode;
+  runPuzzle!(__MODULE__, puzzle1)(input);
+  runPuzzle!(__MODULE__, puzzle2)(input);
 }

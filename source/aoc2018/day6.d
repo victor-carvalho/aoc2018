@@ -20,9 +20,7 @@ auto parsePoints(string input) {
     .array;
 }
 
-auto puzzle1(string input) {
-  auto points = input.parsePoints;
-
+auto puzzle1(Tuple!(int,int)[] points) {
   auto xMax = points.map!"a[0]".maxElement;
   auto yMax = points.map!"a[1]".maxElement;
   auto areas = new int[points.length];
@@ -52,9 +50,7 @@ auto puzzle1(string input) {
   return areas.maxElement;
 }
 
-auto puzzle2(string input) {
-  auto points = input.parsePoints;
-
+auto puzzle2(Tuple!(int,int)[] points) {
   auto xs = points.map!"a[0]".maxElement.iota;
   auto ys = points.map!"a[1]".maxElement.iota;
 
@@ -67,6 +63,7 @@ auto puzzle2(string input) {
 void run() {
   import aoc2018.utils;
 
-  runPuzzle!("day6", puzzle1)();
-  runPuzzle!("day6", puzzle2)();
+  auto input = readInput(__MODULE__).parsePoints;
+  runPuzzle!(__MODULE__, puzzle1)(input);
+  runPuzzle!(__MODULE__, puzzle2)(input);
 }

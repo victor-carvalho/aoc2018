@@ -25,21 +25,23 @@ if (isInputRange!Range && (is(ElementType!Range == char) || is(ElementType!Range
   return stack.length;
 }
 
-auto puzzle1(string input) {
-  return input.strip.byChar.fullyReact;
+auto puzzle1(Range)(Range input)
+if (isInputRange!Range && (is(ElementType!Range == char) || is(ElementType!Range == immutable(char)))) {
+  return input.fullyReact;
 }
 
-auto puzzle2(string input) {
-  auto source = input.strip.byChar;
+auto puzzle2(Range)(Range input)
+if (isInputRange!Range && (is(ElementType!Range == char) || is(ElementType!Range == immutable(char)))) {
   return "abcdefghijlmnopqrstuvxz"
     .byChar
-    .map!((u => source.filter!(c => c.toLower != u).fullyReact))
+    .map!((u => input.filter!(c => c.toLower != u).fullyReact))
     .minElement;
 }
 
 void run() {
   import aoc2018.utils;
 
-  runPuzzle!("day5", puzzle1)();
-  runPuzzle!("day5", puzzle2)();
+  auto input = readInput(__MODULE__).strip.byChar;
+  runPuzzle!(__MODULE__, puzzle1)(input);
+  runPuzzle!(__MODULE__, puzzle2)(input);
 }
