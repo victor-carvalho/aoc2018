@@ -3,12 +3,15 @@
 docs.json
 __dummy.html
 docs/
+!aoc2018/
+aoc2018
 aoc2018.so
 aoc2018.dylib
 aoc2018.dll
 aoc2018.a
 aoc2018.lib
 aoc2018-test-*
+*.png
 *.exe
 *.o
 *.obj

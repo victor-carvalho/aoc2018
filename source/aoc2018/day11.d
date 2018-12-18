@@ -83,10 +83,39 @@ auto puzzle2(ref int[300][300] grid) {
   return tuple(maxX, maxY, maxSize);
 }
 
+// An implementation that I saw on reddit that's very fast
+auto puzzle2WithSummedAreaTable(int serial) {
+  int[301][301] summed;
+  foreach(x; 1..301) {
+    foreach(y; 1..301) {
+      auto level = powerLevel(x,y,serial);
+      summed[x][y] = summed[x-1][y] + summed[x][y-1] - summed[x-1][y-1];
+    }
+  }
+  auto maxSum = int.min;
+  auto maxSize = 0;
+  auto maxX = 0;
+  auto maxY = 0;
+  foreach(s; 1..301) {
+    foreach(x; s..301) {
+      foreach(y; s..301) {
+        int total = summed[x][y] - summed[x-s][y] - summed[x][y-s] + summed[x-s][y-s];
+        if (total > maxSum) {
+          maxSize = s;
+          maxX = x;
+          maxY = y;
+        }
+      }
+    }
+  }
+  
+  return tuple(maxX, maxY, maxSize);
+}
+
 void run() {
   import aoc2018.utils;
-
-  auto serial = 7165;
+  
+  int serial = 7165;
   int[300][300] grid;
   foreach(x; 1..301) {
     foreach(y; 1..301) {
