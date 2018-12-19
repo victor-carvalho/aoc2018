@@ -3,6 +3,7 @@
 	"authors": [
 		"Victor Carvalho"
 	],
+  "targetPath": "build",
 	"description": "A minimal D application.",
 	"copyright": "Copyright © 2018, Victor Carvalho",
 	"license": "proprietary",

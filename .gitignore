@@ -1,4 +1,3 @@
-!*.*
 .dub
 docs.json
 __dummy.html
@@ -9,6 +8,7 @@ aoc2018.dll
 aoc2018.a
 aoc2018.lib
 aoc2018-test-*
+build/
 *.png
 *.exe
 *.o
