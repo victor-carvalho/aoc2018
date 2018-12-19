@@ -18,18 +18,15 @@ auto readInput(string moduleName) {
   return readText(inputPath(moduleName.find(".")[1..$]));
 }
 
-template runPuzzle(string inputName, alias fun) {
-  void runPuzzle() {
-    enum string funName = __traits(identifier, fun);
-    enum path = inputPath(inputName);
-    printResult(inputName, funName, fun(readText(path)));
-  }
-}
-
-template runPuzzle(string moduleName, alias fun, A) {
-  void runPuzzle(A input) {
-    enum string funName = __traits(identifier, fun);
-    printResult(moduleName, funName, fun(input));
+template runPuzzle(string moduleName, alias fun) {
+  enum string funName = __traits(identifier, fun);
+  void runPuzzle(A...)(A input) {
+    static if (A.length == 0) {
+      enum path = inputPath(moduleName);
+      printResult(moduleName, funName, fun(readText(path)));
+    } else {
+      printResult(moduleName, funName, fun(input));
+    }
   }
 }
 
