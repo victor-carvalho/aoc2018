@@ -22,8 +22,7 @@ template runPuzzle(string moduleName, alias fun) {
   enum string funName = __traits(identifier, fun);
   void runPuzzle(A...)(A input) {
     static if (A.length == 0) {
-      enum path = inputPath(moduleName);
-      printResult(moduleName, funName, fun(readText(path)));
+      printResult(moduleName, funName, fun(readInput(moduleName)));
     } else {
       printResult(moduleName, funName, fun(input));
     }

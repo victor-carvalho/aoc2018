@@ -8,7 +8,9 @@
 	"copyright": "Copyright © 2018, Victor Carvalho",
 	"license": "proprietary",
 	"dependencies": {
-		"emsi_containers": "~>0.6",
+		"optional": "~>0.9.0",
+		"memutils": "~>0.4.13",
+		"emsi_containers": "0.8.0-alpha.11",
 		"arsd-official:image_files": "~>2.1.3"
 	}
 }

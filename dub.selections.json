@@ -2,7 +2,11 @@
 	"fileVersion": 1,
 	"versions": {
 		"arsd-official": "2.1.3",
-		"emsi_containers": "0.7.0",
+		"bolts": "0.11.0",
+		"emsi_containers": "0.8.0-alpha.11",
+		"memutils": "0.4.13",
+		"optional": "0.9.0",
+		"silly": "0.8.0",
 		"stdx-allocator": "2.77.4"
 	}
 }
