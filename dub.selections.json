@@ -5,6 +5,8 @@
 		"bolts": "0.11.0",
 		"emsi_containers": "0.8.0-alpha.11",
 		"memutils": "0.4.13",
+		"mir-algorithm": "3.1.21",
+		"mir-core": "0.1.1",
 		"optional": "0.9.0",
 		"silly": "0.8.0",
 		"stdx-allocator": "2.77.4"
