@@ -81,7 +81,6 @@ auto puzzle2(ubyte[][] input) {
       workQueue.insert(Task(node, time));
     }
 
-
     auto task = workQueue.front;
     workQueue.removeFront;
     time = task.time;

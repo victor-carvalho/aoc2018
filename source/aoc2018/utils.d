@@ -20,7 +20,7 @@ auto readInput(string moduleName) {
 
 template runPuzzle(string moduleName, alias fun) {
   enum string funName = __traits(identifier, fun);
-  void runPuzzle(A...)(A input) {
+  void runPuzzle(A...)(auto ref A input) {
     static if (A.length == 0) {
       printResult(moduleName, funName, fun(readInput(moduleName)));
     } else {
