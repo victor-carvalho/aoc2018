@@ -15,9 +15,7 @@ if (isInputRange!Range && is(ElementType!Range == int)) {
 auto puzzle2(Range)(Range input)
 if (isInputRange!Range && is(ElementType!Range == int)) {
 	auto freqs = input.cycle.cumulativeFold!((acc, x) => acc + x)(0);
-
-	auto seen = HashSet!int(1);
-
+	auto seen = HashSet!int();
 	seen.insert(0);
 
 	foreach (freq; freqs) {

@@ -83,5 +83,5 @@ auto puzzle(string input) {
 void run() {
   import aoc2018.utils;
 
-  runPuzzle!("day10", puzzle)();
+  runPuzzle!(__MODULE__, puzzle)();
 }
